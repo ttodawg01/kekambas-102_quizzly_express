@@ -12,6 +12,11 @@ app.get('/users', (req, res) => {
     res.send('Users')
 })
 
+// Import function to initialize routes
+const initRoutes = require('./src/routes');
+// Call the initRoutes function with the app
+initRoutes(app);
+
 app.listen(port, () => {
     console.log(`Server is listening on port ${port}`)
 })
