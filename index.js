@@ -1,11 +1,20 @@
+const dotenv = require('dotenv');
+dotenv.config();
 const express = require('express');
 const app = express();
-const port = 3000;
+const port = process.env.PORT;
 const path = require('path');
+const { connectDB } = require('./src/db');
+
+// Execute the connectDB function to connect to our database
+connectDB();
 
 app.set('view engine', 'ejs')
 // Update the location of the folder for the res.render to use
 app.set('views', path.join(__dirname, 'src/templates/views'))
+
+// Set up middleware to parse form data and add to request body
+app.use(express.urlencoded({ extended: true }))
 
 app.get('/', (req, res) => {
     res.send('Hello World')
